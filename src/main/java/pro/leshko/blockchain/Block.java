@@ -9,12 +9,12 @@ public class Block {
     private String data;
     private String prevHash;
 
-    Block(final Instant timestamp, final String data) {
+    public Block(final Instant timestamp, final String data) {
         this.timestamp = timestamp;
         this.data = data;
     }
 
-    Block(final Instant timestamp, final String data, final String prevHash) {
+    public Block(final Instant timestamp, final String data, final String prevHash) {
         this(timestamp, data);
         this.prevHash = prevHash;
     }
