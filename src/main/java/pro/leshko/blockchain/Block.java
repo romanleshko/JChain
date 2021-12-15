@@ -7,19 +7,19 @@ public class Block {
 
     private Instant timestamp;
     private String data;
-    private String prevHash;
+    private int prevHash;
 
     public Block(final String data) {
         this.timestamp = Instant.now();
         this.data = data;
     }
 
-    public Block(final String data, final String prevHash) {
+    public Block(final String data, final int prevHash) {
         this(data);
         this.prevHash = prevHash;
     }
 
-    public Block(final Instant timestamp, final String data, final String prevHash) {
+    public Block(final Instant timestamp, final String data, final int prevHash) {
         this(data, prevHash);
         this.timestamp = timestamp;
     }
@@ -40,11 +40,11 @@ public class Block {
         this.data = data;
     }
 
-    public String getPrevHash() {
+    public int getPrevHash() {
         return prevHash;
     }
 
-    public void setPrevHash(String prevHash) {
+    public void setPrevHash(int prevHash) {
         this.prevHash = prevHash;
     }
 
@@ -66,6 +66,6 @@ public class Block {
     @Override
     public String toString() {
         return String.format(
-                "Block {timestamp='%s', data='%s', prevHash='%s'}", this.timestamp, this.data, this.prevHash);
+                "Block {hash='%d' timestamp='%s', data='%s', prevHash='%d'}", this.hashCode(), this.timestamp, this.data, this.prevHash);
     }
 }
