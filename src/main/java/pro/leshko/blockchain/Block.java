@@ -9,14 +9,19 @@ public class Block {
     private String data;
     private String prevHash;
 
-    public Block(final Instant timestamp, final String data) {
-        this.timestamp = timestamp;
+    public Block(final String data) {
+        this.timestamp = Instant.now();
         this.data = data;
     }
 
-    public Block(final Instant timestamp, final String data, final String prevHash) {
-        this(timestamp, data);
+    public Block(final String data, final String prevHash) {
+        this(data);
         this.prevHash = prevHash;
+    }
+
+    public Block(final Instant timestamp, final String data, final String prevHash) {
+        this(data, prevHash);
+        this.timestamp = timestamp;
     }
 
     public Instant getTimestamp() {
