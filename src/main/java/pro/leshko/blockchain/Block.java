@@ -43,13 +43,9 @@ public class Block {
         byte[] digest = md.digest(this.toString().getBytes(StandardCharsets.UTF_8));
 
         final StringBuilder hexHash = new StringBuilder(2 * digest.length);
-        for (byte b : digest) {
-            String hex = Integer.toHexString(0xff & b);
-            if (hex.length() == 1)
-                hexHash.append("0");
+        for (byte b : digest)
+            hexHash.append(String.format("%02x", b));
 
-            hexHash.append(hex);
-        }
         this.hash = hexHash.toString();
     }
 
