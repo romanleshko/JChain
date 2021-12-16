@@ -5,10 +5,11 @@ import java.util.List;
 
 public class Blockchain {
     private final List<Block> chain = new LinkedList<>();
+    private final int DIFFICULTY = 2;
 
     public Blockchain() {
         final Block genesis = new Block("Genesis");
-        genesis.computeHash();
+        genesis.mine(DIFFICULTY);
         this.chain.add(genesis);
     }
 
@@ -38,7 +39,7 @@ public class Blockchain {
     }
 
     public void addBlock(final Block newBlock) {
-        newBlock.computeHash();
+        newBlock.mine(DIFFICULTY);
         newBlock.setPrevHash(this.getLastBlock().getHash());
         chain.add(newBlock);
     }

@@ -53,6 +53,13 @@ public class Block {
         this.hash = hexHash.toString();
     }
 
+    public void mine(final int difficulty) {
+        while (this.hash.isBlank() || !this.hash.substring(0, difficulty).equals("8".repeat(difficulty))) {
+            this.computeHash();
+            this.nonce++;
+        }
+    }
+
     public Instant getTimestamp() {
         return timestamp;
     }
