@@ -11,8 +11,6 @@ public class Application {
         blockchain.addBlock(new Block("Second block"));
 
         blockchain.print();
-        blockchain.getChain().get(1).setData("Let's break the chain");
-        blockchain.print();
 
     }
 }

@@ -7,7 +7,9 @@ public class Blockchain {
     private final List<Block> chain = new LinkedList<>();
 
     public Blockchain() {
-        this.chain.add(new Block("Genesis"));
+        final Block genesis = new Block("Genesis");
+        genesis.computeHash();
+        this.chain.add(genesis);
     }
 
     public List<Block> getChain() { // Only for testing/messing around
@@ -29,14 +31,15 @@ public class Blockchain {
             Block prev = chain.get(i - 1);
             Block cur = chain.get(i);
 
-            if (prev.hashCode() != cur.getPrevHash())
+            if (!prev.getHash().equals(cur.getPrevHash()))
                 return false;
         }
         return true;
     }
 
     public void addBlock(final Block newBlock) {
-        newBlock.setPrevHash(this.getLastBlock().hashCode());
+        newBlock.computeHash();
+        newBlock.setPrevHash(this.getLastBlock().getHash());
         chain.add(newBlock);
     }
 }
