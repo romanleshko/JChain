@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Blockchain {
     private final List<Block> chain = new LinkedList<>();
-    private final int DIFFICULTY = 2;
+    private static final int DIFFICULTY = 2;
 
     public Blockchain() {
         final Block genesis = new Block("Genesis");

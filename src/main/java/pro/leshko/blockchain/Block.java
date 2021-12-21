@@ -34,13 +34,13 @@ public class Block {
         final MessageDigest md;
         try {
             md = MessageDigest.getInstance("SHA-256");
-        } catch (NoSuchAlgorithmException e) {
+        } catch (final NoSuchAlgorithmException e) {
             e.printStackTrace();
             return;
         }
 
         assert md != null;
-        byte[] digest = md.digest(this.toString().getBytes(StandardCharsets.UTF_8));
+        final byte[] digest = md.digest(this.toString().getBytes(StandardCharsets.UTF_8));
 
         final StringBuilder hexHash = new StringBuilder(2 * digest.length);
         for (byte b : digest)
