@@ -4,29 +4,36 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 public class Block {
 
     private Instant timestamp;
-    private String data;
+    private List<Transaction> transactions = Collections.emptyList();
     private String prevHash;
     private String hash;
     private long nonce;
 
-    public Block(final String data) {
+    public Block() {
         this.timestamp = Instant.now();
-        this.data = data;
         this.hash = "";
     }
 
-    public Block(final String data, final String prevHash) {
-        this(data);
+    public Block(final List<Transaction> transactions) {
+        this.timestamp = Instant.now();
+        this.transactions = transactions;
+        this.hash = "";
+    }
+
+    public Block(final List<Transaction> transactions, final String prevHash) {
+        this(transactions);
         this.prevHash = prevHash;
     }
 
-    public Block(final Instant timestamp, final String data, final String prevHash) {
-        this(data, prevHash);
+    public Block(final Instant timestamp, final List<Transaction> transactions, final String prevHash) {
+        this(transactions, prevHash);
         this.timestamp = timestamp;
     }
 
@@ -64,14 +71,6 @@ public class Block {
         this.timestamp = timestamp;
     }
 
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
-
     public String getPrevHash() {
         return prevHash;
     }
@@ -96,6 +95,14 @@ public class Block {
         this.nonce = nonce;
     }
 
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTrasactions(List<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -103,19 +110,19 @@ public class Block {
         Block block = (Block) o;
         return nonce == block.nonce &&
                 Objects.equals(timestamp, block.timestamp) &&
-                Objects.equals(data, block.data) &&
+                Objects.equals(transactions, block.transactions) &&
                 Objects.equals(prevHash, block.prevHash) &&
                 Objects.equals(hash, block.hash);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(timestamp, data, prevHash, hash, nonce);
+        return Objects.hash(timestamp, transactions, prevHash, hash, nonce);
     }
 
     @Override
     public String toString() {
         return String.format(
-                "Block {hash='%s' timestamp='%s', data='%s', prevHash='%s', nonce='%s'}", this.hash, this.timestamp, this.data, this.prevHash, this.nonce);
+                "Block {timestamp='%s', transactions='%s', prevHash='%s', hash='%s', nonce='%s'}", this.timestamp, this.transactions, this.prevHash, this.hash, this.nonce);
     }
 }
